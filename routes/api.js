@@ -1,0 +1,36 @@
+const Transaction = require("../models/transaction.js");
+
+module.exports = function (app) {
+app.post("/api/transaction", ({ body }, res) => {
+  Transaction.create(body)
+    .then(dbTransaction => {
+      res.json(dbTransaction);
+    })
+    .catch(err => {
+      res.status(400).json(err);
+    });
+});
+
+app.post("/api/transaction/bulk", ({ body }, res) => {
+  Transaction.insertMany(body)
+    .then(dbTransaction => {
+      res.json(dbTransaction);
+    })
+    .catch(err => {
+      res.status(400).json(err);
+    });
+});
+
+app.get("/api/transaction", (req, res) => {
+  Transaction.find({})
+    .sort({ date: -1 })
+    .then(dbTransaction => {
+      res.json(dbTransaction);
+    })
+    .catch(err => {
+      res.status(400).json(err);
+    });
+});
+
+}
+
