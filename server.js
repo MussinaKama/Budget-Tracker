@@ -8,7 +8,6 @@ const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/workout";
 const app = express();
 
 app.use(logger("dev"));
-
 app.use(compression());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
